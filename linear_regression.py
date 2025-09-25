@@ -29,7 +29,6 @@ def create_polymonial_features(X, degree):
     '''
     n_samples, n_features = X.shape
     phi = np.ones((n_samples, 1))
-    phi = np.hstack(1)
 
     # add for OG feature
     for i in range(n_features):
@@ -55,19 +54,16 @@ def linear_regression(training_file, test_file, degree, lambda1):
     # calculate weights using regularized least squares
     n_features = phi_train.shape[1]
     I = np.eye(n_features)
-    # Don't regularize bias term w0
-    if n_features > 0:
-        I[0, 0] = 0
     phi_T = phi_train.T
     A = np.dot(phi_T, phi_train) + lambda1 * I
     b = np.dot(phi_T, y_train)
-    w = np.dot(np.linalg.pinv(A), b)
+    A_inverse = np.linalg.pinv(A)
+    w = np.dot(A_inverse, b)
 
     # Print weightss
     for i, weight in enumerate(w):
         print(f"w{i}={weight:.4f}")
-    
-    print()
+
 
     # create poly feats for each test data
     phi_test = create_polymonial_features(x_test, degree)

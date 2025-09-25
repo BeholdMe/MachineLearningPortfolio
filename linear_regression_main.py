@@ -19,6 +19,6 @@ test_file = dataset_directory + "/" + test_file
 # When you test your code, you can select the hyperparameters you want to use 
 # by modifying the next lines
 degree = 2
-lambda1 = 0
+lambda1 = 1
 
 linear_regression(training_file, test_file, degree, lambda1)
