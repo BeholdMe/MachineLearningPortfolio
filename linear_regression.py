@@ -24,11 +24,12 @@ def create_polymonial_features(X, degree):
     '''
         Create polymonial feature up to specific degree
         If degree == 1 -> φ(x) = (1, x1, x2, ..., xD)T
-        If degree == 2 -> φ(x) = (1, x1, (x1)2, x2, (x2)2 ..., xD, (xD)2)T
-        If degree == 3 -> φ(x) = (1, x1, (x1)2, (x1)3, x2, (x2)2, (x2)3, ..., xD, (xD)2, (xD)3)T
+        If degree == 2 -> φ(x) = (1, x1, (x1)^2, x2, (x2)^2 ..., xD, (xD)^2)T
+        If degree == 3 -> φ(x) = (1, x1, (x1)^2, (x1)^3, x2, (x2)^2, (x2)^3, ..., xD, (xD)^2, (xD)^3)T
     '''
     n_samples, n_features = X.shape
     phi = np.ones((n_samples, 1))
+    phi = np.hstack(1)
 
     # add for OG feature
     for i in range(n_features):
