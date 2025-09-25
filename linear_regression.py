@@ -5,6 +5,21 @@ ID:     1001761950
 
 import numpy as np
 
+# function to find standard deviation w/denominator as N - 1
+# if < 0.01, return 0.01
+def std(data_column, avg):
+    N = len(data_column)
+    # avoid division by 0
+    if N <= 1:
+        return 0.01
+    d2 = abs(data_column - avg) ** 2
+    var = np.sum(d2) / (N - 1)
+    std = np.sqrt(var)
+    if std < 0.01:
+        return 0.01
+    else:
+        return std
+
 def create_polymonial_features(X, degree):
     '''
         Create polymonial feature up to specific degree
