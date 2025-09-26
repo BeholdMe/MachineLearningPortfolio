@@ -52,12 +52,17 @@ def linear_regression(training_file, test_file, degree, lambda1):
     phi_train = create_polymonial_features(x_train, degree)
 
     # calculate weights using regularized least squares
+    # w = (λI + φ^T * φ)^-1 * φ^T * t
     n_features = phi_train.shape[1]
     I = np.eye(n_features)
     phi_T = phi_train.T
+    # (λI + φ^T * φ)
     A = np.dot(phi_T, phi_train) + lambda1 * I
+    # φ^T * t
     b = np.dot(phi_T, y_train)
+    # (λI + φ^T * φ)^-1 using pseudo-inverse pinv
     A_inverse = np.linalg.pinv(A)
+    # (λI + φ^T * φ)^-1 * φ^T * t
     w = np.dot(A_inverse, b)
 
     # Print weightss
